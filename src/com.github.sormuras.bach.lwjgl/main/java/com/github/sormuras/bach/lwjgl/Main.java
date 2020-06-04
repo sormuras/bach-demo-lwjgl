@@ -13,7 +13,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 /** Copied from https://www.lwjgl.org/guide */
-public class HelloWorld {
+public class Main {
 
   // The window handle
   private long window;
@@ -108,6 +108,6 @@ public class HelloWorld {
   }
 
   public static void main(String[] args) {
-    new HelloWorld().run();
+    new Main().run();
   }
 }

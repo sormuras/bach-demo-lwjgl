@@ -9,12 +9,12 @@
 
 ## Build
 
-- Call `jshell https://bit.ly/bach-build` in base directory of this project.
+- Call `jshell https://sormuras.de/bach/build` in base directory of this project.
 
 ## Run
 
-- Call `./bach/out/main/image/bin/bach-lwjgl` on Linux/Mac
-- or call `.bach\out\main\image\bin\bach-lwjgl.bat` on Windows.
+- Call `./bach/workspace/image/bin/lwjgl` on Linux/Mac
+- or call `.bach\workspace\image\bin\lwjgl` on Windows.
 
 [Bach.java]: https://github.com/sormuras/bach
 [JDK]: https://jdk.java.net

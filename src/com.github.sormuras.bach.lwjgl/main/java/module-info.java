@@ -1,4 +1,3 @@
-// --main-class com.github.sormuras.bach.lwjgl.HelloWorld
 module com.github.sormuras.bach.lwjgl {
   requires org.lwjgl;
   requires org.lwjgl.natives;
