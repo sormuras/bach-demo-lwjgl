@@ -28,17 +28,9 @@ jobs:
           java-version: ${{ matrix.java }}
       - name: 'Build with Bach'
         uses: sormuras/bach-build@main
-      - name: 'Package self-contained Java application'
-        shell: bash
-        run: |
-          jpackage --verbose \
-          --runtime-image .bach/workspace/image \
-          --name bach-lwjgl \
-          --module com.github.sormuras.bach.lwjgl/com.github.sormuras.bach.lwjgl.Main \
-          --dest .bach/workspace/package
-      - name: 'Upload packaged application'
+      - name: 'Upload custom runtime image'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ github.sha }}
           path: |
-            .bach/workspace/package
+            .bach/workspace/image
