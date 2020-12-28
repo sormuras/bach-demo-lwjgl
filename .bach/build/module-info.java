@@ -5,6 +5,5 @@ import com.github.sormuras.bach.project.ProjectInfo;
 module build {
   requires com.github.sormuras.bach;
 
-  provides com.github.sormuras.bach.project.ModuleLookup with
-      build.ExternalModules;
+  provides com.github.sormuras.bach.BuildProgram with build.Program;
 }

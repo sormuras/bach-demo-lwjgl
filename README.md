@@ -4,7 +4,7 @@ A demo of building a modular application with [Bach.java] based on [GET STARTED/
 
 ## Prepare
 
-- Download and install [JDK] 16-ea or later
+- Download and install [JDK] 16 or later
 - Clone this repository
 - Open a command shell and ensure `jshell --version` is working correctly
 

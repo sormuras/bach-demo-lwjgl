@@ -17,7 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macOS-latest, windows-latest ]
-        java: [ 16-ea ]
+        java: [ 17-ea ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: 'Check out repository'
@@ -27,7 +27,9 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
       - name: 'Build with Bach'
-        uses: sormuras/bach-build@main
+        uses: sormuras/bach-build@v1
+        with:
+          bach-version: 16
       - name: 'Upload custom runtime image'
         uses: actions/upload-artifact@v2
         with:
