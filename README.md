@@ -6,14 +6,13 @@ A demo of building a modular application with [Bach.java] based on [GET STARTED/
 
 - Download and install [JDK] 16 or later
 - Clone this repository
-- Open a command shell and ensure `jshell --version` is working correctly
 
 ## Build
 
 Change into the base directory of your cloned project and call:
 
 ```
-jshell https://bit.ly/bach-main-build
+java --module-path .bach/cache --module com.github.sormuras.bach build
 ```
 
 ## Run
