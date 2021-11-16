@@ -7,7 +7,7 @@ import java.util.List;
 class build {
   public static void main(String... args) {
     try (var bach = new Bach(args)) {
-      var grabber = bach.grabber(new LWJGLModuleLookup("3.3.0-SNAPSHOT"));
+      var grabber = bach.grabber(new LWJGLModuleLookup("3.3.0"));
 
       var builder = bach.builder().conventional("com.github.sormuras.bach.lwjgl");
 
@@ -85,23 +85,6 @@ class build {
       var natives = module.endsWith(".natives");
       var end = natives ? module.length() - 8 : module.length();
       var artifact = "lwjgl" + module.substring(9, end).replace('.', '-');
-      if (version.equals("3.3.0-SNAPSHOT")) {
-        return switch (module) {
-          case "org.lwjgl" -> "https://oss.sonatype.org/content/repositories/snapshots/org/lwjgl/lwjgl/3.3.0-SNAPSHOT/lwjgl-3.3.0-20211105.165143-15.jar";
-          case "org.lwjgl.natives" -> "https://oss.sonatype.org/content/repositories/snapshots/org/lwjgl/lwjgl/3.3.0-SNAPSHOT/lwjgl-3.3.0-20211105.165143-15-"
-              + classifier
-              + ".jar";
-          case "org.lwjgl.glfw" -> "https://oss.sonatype.org/content/repositories/snapshots/org/lwjgl/lwjgl-glfw/3.3.0-SNAPSHOT/lwjgl-glfw-3.3.0-20211105.165143-15.jar";
-          case "org.lwjgl.glfw.natives" -> "https://oss.sonatype.org/content/repositories/snapshots/org/lwjgl/lwjgl-glfw/3.3.0-SNAPSHOT/lwjgl-glfw-3.3.0-20211105.165143-15-"
-              + classifier
-              + ".jar";
-          case "org.lwjgl.opengl" -> "https://oss.sonatype.org/content/repositories/snapshots/org/lwjgl/lwjgl-opengl/3.3.0-SNAPSHOT/lwjgl-opengl-3.3.0-20211105.165143-15.jar";
-          case "org.lwjgl.opengl.natives" -> "https://oss.sonatype.org/content/repositories/snapshots/org/lwjgl/lwjgl-opengl/3.3.0-SNAPSHOT/lwjgl-opengl-3.3.0-20211105.165143-15-"
-              + classifier
-              + ".jar";
-          default -> null;
-        };
-      }
       return Maven.central("org.lwjgl", artifact, version, natives ? classifier : "");
     }
 
