@@ -23,9 +23,7 @@ jobs:
       - name: 'Check out repository'
         uses: actions/checkout@v2
       - name: 'Set up JDK'
-        uses: actions/setup-java@v1
-        with:
-          java-version: ${{ matrix.java }}
+        uses: actions/setup-jdk@main
       - name: 'Build with Bach'
         shell: bash
         run: .bach/bin/bach build
