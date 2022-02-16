@@ -12,18 +12,17 @@ on:
         default: 'Because...'
 jobs:
   build:
-    name: "Build (JDK-${{ matrix.java }}, ${{ matrix.os }})"
+    name: "Build (${{ matrix.os }})"
     strategy:
       fail-fast: false
       matrix:
         os: [ ubuntu-latest, macOS-latest, windows-latest ]
-        java: [ 17 ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: 'Check out repository'
         uses: actions/checkout@v2
       - name: 'Set up JDK'
-        uses: sormuras/setup-jdk@main
+        uses: oracle-actions/setup-java@v1
       - name: 'Build with Bach'
         shell: bash
         run: .bach/bin/bach build
