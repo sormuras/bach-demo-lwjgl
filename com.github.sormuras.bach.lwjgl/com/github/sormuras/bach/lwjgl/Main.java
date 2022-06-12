@@ -20,6 +20,7 @@ public class Main {
 
   public void run() {
     System.out.println("Hello LWJGL " + Version.getVersion() + "!");
+    System.out.println("Loaded from " + Version.class.getModule());
 
     init();
     loop();
