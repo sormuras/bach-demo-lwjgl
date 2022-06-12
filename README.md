@@ -20,22 +20,28 @@ Change into the root directory of your cloned project and call:
 ```shell script
 .bach\bin\bach build
 ```
-
 ## Run via Java Launcher
 
-- Call `.bach/workspace/image/bin/java --module com.github.sormuras.bach.lwjgl` on Linux/Mac or
-- call `.bach\workspace\image\bin\java --module com.github.sormuras.bach.lwjgl` on Windows.
+- Linux/Mac
+```shell script
+java --module-path .bach/out/main/modules:.bach/external-modules --module com.github.sormuras.bach.lwjgl
+```
+
+- Windows
+```shell script
+java --module-path .bach\out\main\modules;.bach\external-modules --module com.github.sormuras.bach.lwjgl
+```
 
 ## Run via custom runtime image
 
 - Linux/Mac
 ```shell script
-.bach/workspace/image/bin/bach-lwjgl
+.bach/out/main/image/bin/bach-lwjgl
 ```
 
 - Windows
 ```shell script
-.bach\workspace\image\bin\bach-lwjgl
+.bach\out\main\image\bin\bach-lwjgl
 ```
 
 

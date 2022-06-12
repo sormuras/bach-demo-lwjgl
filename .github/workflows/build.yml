@@ -31,4 +31,4 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ github.sha }}
           path: |
-            .bach/workspace/image
+            .bach/out/main/image

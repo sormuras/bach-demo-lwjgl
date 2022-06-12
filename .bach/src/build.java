@@ -1,41 +1,41 @@
 import com.github.sormuras.bach.Bach;
-import com.github.sormuras.bach.ExternalModuleLocator;
 import com.github.sormuras.bach.ToolCall;
-import com.github.sormuras.bach.external.Maven;
-import java.util.List;
+import com.github.sormuras.bach.project.ExternalModuleLocator;
+import java.util.StringJoiner;
 
 class build {
   public static void main(String... args) {
-    try (var bach = new Bach(args)) {
-      var grabber = bach.grabber(new LWJGLModuleLookup("3.3.0"));
+    var initial = Bach.ofSystem(args);
+    var project = initial.project().with(new LWJGLModuleLookup("3.3.1"));
+    var bach = new Bach(initial.configuration(), project);
+    bach.run("build");
 
-      var builder = bach.builder().conventional("com.github.sormuras.bach.lwjgl");
+    var main = bach.project().spaces().main();
+    var paths = bach.configuration().paths();
+    var modulePaths = project.spaces().test().toModulePath(paths).orElseThrow();
 
-      builder.grab(
-          grabber, "org.lwjgl.natives", "org.lwjgl.glfw.natives", "org.lwjgl.opengl.natives");
-
-      builder.compile();
-
-      if (!System.getenv().containsKey("CI")) {
-        bach.logCaption("Launch LWJGL-based Application");
-        // FXGL calls System.exit(), don't launch in-process: builder.runModule("com...bach.fxgl");
-        var modulePaths = List.of(bach.path().workspace("modules"), bach.path().externalModules());
-        var java =
-            ToolCall.java()
-                .with("--module-path", modulePaths)
-                .with("--module", "com.github.sormuras.bach.lwjgl");
-        bach.run(java);
-      }
-
-      bach.logCaption("Link modules into a custom runtime image");
-      builder.link(jlink -> jlink.with("--launcher", "bach-lwjgl=com.github.sormuras.bach.lwjgl"));
+    if (!System.getenv().containsKey("CI")) {
+      bach.run(ToolCall.of("java")
+          .with("--module-path", modulePaths)
+          .with("--module", main.modules().list().get(0).name()));
     }
+
+    var image = paths.out(main.name(), "image");
+    bach.run("tree", "--mode", "CLEAN", image);
+    bach.run(
+        ToolCall.of("jlink")
+            .with("--output", image)
+            .with("--launcher", "bach-lwjgl=com.github.sormuras.bach.lwjgl")
+            .with("--add-modules", main.modules().names(","))
+            .with("--module-path", modulePaths));
   }
 
   /** Maps well-known LWJGL module names to their Maven Central artifacts. */
   static class LWJGLModuleLookup implements ExternalModuleLocator {
 
-    /** @return the classifier determined via the {@code os.name} system property */
+    /**
+     * @return the classifier determined via the {@code os.name} system property
+     */
     public static String classifier() {
       var os = System.getProperty("os.name").toLowerCase();
       var isWindows = os.contains("win");
@@ -85,7 +85,13 @@ class build {
       var natives = module.endsWith(".natives");
       var end = natives ? module.length() - 8 : module.length();
       var artifact = "lwjgl" + module.substring(9, end).replace('.', '-');
-      return Maven.central("org.lwjgl", artifact, version, natives ? classifier : "");
+      var location = new StringJoiner("/");
+      location.add("https://repo.maven.apache.org/maven2");
+      location.add("org/lwjgl");
+      location.add(artifact);
+      location.add(version);
+      location.add(artifact + "-" + version + (natives ? "-" + classifier : "") + ".jar#SIZE=ANY");
+      return location.toString();
     }
 
     @Override
