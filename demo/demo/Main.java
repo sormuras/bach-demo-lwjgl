@@ -1,4 +1,4 @@
-package com.github.sormuras.bach.lwjgl;
+package demo;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;

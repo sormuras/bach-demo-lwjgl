@@ -1,4 +1,4 @@
-module com.github.sormuras.bach.lwjgl {
+module demo {
   requires org.lwjgl;
   requires org.lwjgl.natives;
   requires org.lwjgl.glfw;
