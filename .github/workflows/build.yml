@@ -22,7 +22,7 @@ jobs:
       - name: 'Check out repository'
         uses: actions/checkout@v4
         with:
-          submodules: recursively
+          submodules: recursive
       - name: 'Set up JDK'
         uses: oracle-actions/setup-java@v1
       - name: 'Build with Bach'
