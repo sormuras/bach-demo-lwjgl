@@ -1,5 +1,4 @@
 import run.bach.workflow.Builder;
-import run.bach.workflow.Structure;
 import run.bach.workflow.Workflow;
 
 record Project(Workflow workflow) implements Builder {
@@ -10,7 +9,7 @@ record Project(Workflow workflow) implements Builder {
                 main ->
                     main.withModule("demo", "demo/module-info.java")
                         .withLauncher("demo=demo/demo.Main")
-                        .with(Structure.Space.Flag.COMPILE_RUNTIME_IMAGE)));
+                        .withCompileRuntimeImage()));
   }
 
   @Override
