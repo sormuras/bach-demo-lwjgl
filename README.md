@@ -4,44 +4,39 @@ A demo of building a modular application with [Bach] based on [GET STARTED/Hello
 
 ## Prepare
 
-- Download and install [JDK] 17 or later
-- Clone this repository
+- Download and install [JDK] 22 or later
+- Clone this repository with submodules
 
 ## Build
 
 Change into the root directory of your cloned project and call:
 
-- Linux/Mac
 ```shell script
-.bach/bin/bach build
+java @build
 ```
 
-- Windows
-```shell script
-.bach\bin\bach build
-```
 ## Run via Java Launcher
 
 - Linux/Mac
 ```shell script
-java --module-path .bach/out/main/modules:.bach/external-modules --module com.github.sormuras.bach.lwjgl
+java --module-path .bach/out/main/modules:lib --module demo
 ```
 
 - Windows
 ```shell script
-java --module-path .bach\out\main\modules;.bach\external-modules --module com.github.sormuras.bach.lwjgl
+java --module-path .bach\out\main\modules;lib --module demo
 ```
 
 ## Run via custom runtime image
 
 - Linux/Mac
 ```shell script
-.bach/out/main/image/bin/bach-lwjgl
+.bach/out/main/image/bin/demo
 ```
 
 - Windows
 ```shell script
-.bach\out\main\image\bin\bach-lwjgl
+.bach\out\main\image\bin\demo
 ```
 
 

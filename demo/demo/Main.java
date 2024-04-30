@@ -12,7 +12,7 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
-/** Copied from https://www.lwjgl.org/guide */
+/** Copied from <a href="https://www.lwjgl.org/guide">LWJGL Guide</a> */
 public class Main {
 
   // The window handle

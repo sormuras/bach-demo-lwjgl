@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/demo" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="external-modules" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="inheritedJdk" />
   </component>
 </module>
